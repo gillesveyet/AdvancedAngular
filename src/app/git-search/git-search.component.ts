@@ -29,7 +29,7 @@ export class GitSearchComponent implements OnInit {
       }
 
       validators.push(this.noSpecialChars);
-      
+
       this.formControls[key] = new FormControl(this.model[key], validators);
     });
 
@@ -62,7 +62,7 @@ export class GitSearchComponent implements OnInit {
   }
 
   gitSearch = () => {
-    this.GitSearchService.gitSearch(this.searchQuery).then((response) => {
+    this.GitSearchService.gitSearch(this.searchQuery).subscribe((response) => {
       this.searchResults = response;
     }, (error) => {
       alert("Error: " + error.statusText)

@@ -1,14 +1,16 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
+import { GitCodeSearchService } from './git-code-search.service';
 import { GitSearchService } from './git-search.service';
 import { GitSearchComponent } from './git-search/git-search.component';
-import { RouterModule, Routes } from '@angular/router';
 import { HomePageComponent } from './home-page/home-page.component';
-import { NotFoundComponent } from './not-found/not-found.component';
 import { NoSpecialCharsDirective } from './no-special-chars.directive';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { UnifiedSearchService } from './unified-search.service';
 
 const appRoutes: Routes = [
     {
@@ -45,7 +47,7 @@ const appRoutes: Routes = [
             appRoutes
         )
     ],
-    providers: [GitSearchService],
+    providers: [GitSearchService, GitCodeSearchService, UnifiedSearchService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

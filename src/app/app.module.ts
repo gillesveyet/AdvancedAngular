@@ -11,38 +11,41 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { NoSpecialCharsDirective } from './no-special-chars.directive';
 
 const appRoutes: Routes = [
-  { path: '', 
-    component: HomePageComponent 
-  },
-  { path: 'search',      
-    redirectTo: '/search/angular', 
-    pathMatch: 'full' },
-  {
-    path: 'search/:query',
-    component: GitSearchComponent,
-    data: {title: 'Git Search'}
-  },
-  { path: '**', component: NotFoundComponent }
+    {
+        path: '',
+        component: HomePageComponent
+    },
+    {
+        path: 'search',
+        redirectTo: '/search/angular',
+        pathMatch: 'full'
+    },
+    {
+        path: 'search/:query',
+        component: GitSearchComponent,
+        data: { title: 'Git Search' }
+    },
+    { path: '**', component: NotFoundComponent }
 ];
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    GitSearchComponent,
-    HomePageComponent,
-    NotFoundComponent,
-    NoSpecialCharsDirective
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    RouterModule.forRoot(
-      appRoutes
-    )
-  ],
-  providers: [GitSearchService],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        GitSearchComponent,
+        HomePageComponent,
+        NotFoundComponent,
+        NoSpecialCharsDirective
+    ],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        RouterModule.forRoot(
+            appRoutes
+        )
+    ],
+    providers: [GitSearchService],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

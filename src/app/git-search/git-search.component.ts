@@ -6,89 +6,89 @@ import { AdvancedSearchModel } from '../advanced-search-model'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 
 @Component({
-  selector: 'app-git-search',
-  templateUrl: './git-search.component.html',
-  styleUrls: ['./git-search.component.css']
+	selector: 'app-git-search',
+	templateUrl: './git-search.component.html',
+	styleUrls: ['./git-search.component.css']
 })
 export class GitSearchComponent implements OnInit {
-  searchResults: GitSearch;
-  searchQuery: string;
-  displayQuery: string;
-  title: string;
-  form: FormGroup;
-  formControls = {};
+	searchResults: GitSearch;
+	searchQuery: string;
+	displayQuery: string;
+	title: string;
+	form: FormGroup;
+	formControls = {};
 
-  constructor(private GitSearchService: GitSearchService, private route: ActivatedRoute, private router: Router) {
-    this.modelKeys.forEach((key) => {
-      let validators = [];
-      if (key === 'q') {
-        validators.push(Validators.required);
-      }
-      if (key === 'stars') {
-        validators.push(Validators.maxLength(4))
-      }
+	constructor(private GitSearchService: GitSearchService, private route: ActivatedRoute, private router: Router) {
+		this.modelKeys.forEach((key) => {
+			let validators = [];
+			if (key === 'q') {
+				validators.push(Validators.required);
+			}
+			if (key === 'stars') {
+				validators.push(Validators.maxLength(4))
+			}
 
-      validators.push(this.noSpecialChars);
+			validators.push(this.noSpecialChars);
 
-      this.formControls[key] = new FormControl(this.model[key], validators);
-    });
+			this.formControls[key] = new FormControl(this.model[key], validators);
+		});
 
-    this.form = new FormGroup(this.formControls);
-  }
+		this.form = new FormGroup(this.formControls);
+	}
 
-  model = new AdvancedSearchModel('', '', '', null, null, '');
-  modelKeys = Object.keys(this.model);
+	model = new AdvancedSearchModel('', '', '', null, null, '');
+	modelKeys = Object.keys(this.model);
 
-  noSpecialChars(c: FormControl) {
-    let REGEXP = new RegExp(/[~`!#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/);
+	noSpecialChars(c: FormControl) {
+		let REGEXP = new RegExp(/[~`!#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/);
 
-    return REGEXP.test(c.value) ? {
-      validateEmail: {
-        valid: false
-      }
-    } : null;
-  }
+		return REGEXP.test(c.value) ? {
+			validateEmail: {
+				valid: false
+			}
+		} : null;
+	}
 
 
-  ngOnInit() {
-    this.route.paramMap.subscribe((params: ParamMap) => {
-      this.searchQuery = params.get('query');
-      this.displayQuery = params.get('query');
-      this.gitSearch();
-    })
-    this.route.data.subscribe((result) => {
-      this.title = result.title
-    });
-  }
+	ngOnInit() {
+		this.route.paramMap.subscribe((params: ParamMap) => {
+			this.searchQuery = params.get('query');
+			this.displayQuery = params.get('query');
+			this.gitSearch();
+		})
+		this.route.data.subscribe((result) => {
+			this.title = result.title
+		});
+	}
 
-  gitSearch = () => {
-    this.GitSearchService.gitSearch(this.searchQuery).subscribe((response) => {
-      this.searchResults = response;
-    }, (error) => {
-      alert("Error: " + error.statusText)
-    })
-  }
+	gitSearch = () => {
+		this.GitSearchService.gitSearch(this.searchQuery).subscribe((response) => {
+			this.searchResults = response;
+		}, (error) => {
+			alert("Error: " + error.statusText)
+		})
+	}
 
-  sendQuery = () => {
-    this.searchResults = null;
-    let search: string = encodeURIComponent(this.form.value.q);
-    let params: string = "";
+	sendQuery = () => {
+		this.searchResults = null;
+		let search: string = encodeURIComponent(this.form.value.q);
+		let params: string = "";
 
-    this.modelKeys.forEach((elem) => {
-      if (elem === 'q') {
-        return false;
-      }
-      if (this.form.value[elem]) {
-        params += '+' + elem + ':' + encodeURIComponent(this.form.value[elem]);
-      }
-    });
+		this.modelKeys.forEach((elem) => {
+			if (elem === 'q') {
+				return false;
+			}
+			if (this.form.value[elem]) {
+				params += '+' + elem + ':' + encodeURIComponent(this.form.value[elem]);
+			}
+		});
 
-    this.searchQuery = search;
-    if (params !== '') {
-      this.searchQuery = search + '+' + params;
-    }
+		this.searchQuery = search;
+		if (params !== '') {
+			this.searchQuery = search + '+' + params;
+		}
 
-    this.displayQuery = this.searchQuery;
-    this.gitSearch();
-  }
+		this.displayQuery = this.searchQuery;
+		this.gitSearch();
+	}
 }

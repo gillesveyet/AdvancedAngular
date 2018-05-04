@@ -4,8 +4,8 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class GitSearchService {
-  constructor(private http: HttpClient) {
-  }
+    constructor(private http: HttpClient) {
+    }
 
-  
+
 }

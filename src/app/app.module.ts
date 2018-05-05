@@ -11,6 +11,8 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { NoSpecialCharsDirective } from './no-special-chars.directive';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { UnifiedSearchService } from './unified-search.service';
+import { RepositoryDisplayComponent } from './repository-display/repository-display.component';
+import { CodeDisplayComponent } from './code-display/code-display.component';
 
 const appRoutes: Routes = [
     {
@@ -36,7 +38,9 @@ const appRoutes: Routes = [
         GitSearchComponent,
         HomePageComponent,
         NotFoundComponent,
-        NoSpecialCharsDirective
+        NoSpecialCharsDirective,
+        RepositoryDisplayComponent,
+        CodeDisplayComponent
     ],
     imports: [
         BrowserModule,

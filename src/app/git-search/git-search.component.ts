@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { AdvancedSearchModel } from '../advanced-search-model';
-import { GitSearch } from '../git-search';
+import { UnifiedSearch } from '../unified-search';
 import { UnifiedSearchService } from '../unified-search.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { UnifiedSearchService } from '../unified-search.service';
     styleUrls: ['./git-search.component.css']
 })
 export class GitSearchComponent implements OnInit {
-    searchResults: GitSearch;
+    searchResults: UnifiedSearch;
     searchQuery: string;
     displayQuery: string;
     title: string;
@@ -64,7 +64,7 @@ export class GitSearchComponent implements OnInit {
     gitSearch = () => {
         this.UnifiedSearchService.unifiedSearch(this.searchQuery).subscribe((response) => {
             console.log(response);
-            this.searchResults = response.repositories;
+            this.searchResults = response;
         }, (error) => {
             alert("Error: " + error.statusText)
         })

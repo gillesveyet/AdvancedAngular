@@ -1,11 +1,12 @@
 <li [ngStyle]="{'background-color' : (i % 2 === 0) ? 'springgreen' : 'palegreen'}" class="list_item" *ngFor="let result of searchResults.items; index as i;">
     <a [href]="result.html_url">
-      <img class="avatar" [src]="result.repository.owner.avatar_url" /> 
-      <h4 class="title">Code Result: {{result.name}} 
-        <small> by {{result.repository.owner.login | uppercase}}</small> 
-      </h4>
-    </a> 
-    <p class="description"> {{result.repository.description}}</p> 
+        <img class="avatar" [src]="result.repository.owner.avatar_url" />
+        <h4 class="title">Code Result: {{result.name}}
+            <small> by {{result.repository.owner.login | uppercase}}</small>
+        </h4>
+    </a>
+    <span class="favorite_icon" *ngIf="!checkFavorite(result)" (click)="addFavorite(result)">&#9734;</span>
+    <span class="favorite_icon favorited" *ngIf="checkFavorite(result)">&#9733;</span>
+    <p class="description"> {{result.repository.description}}</p>
     <p> Path: {{result.path}} </p>
-  </li>
-  
+</li>

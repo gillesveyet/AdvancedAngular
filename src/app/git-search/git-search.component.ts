@@ -15,6 +15,7 @@ export class GitSearchComponent implements OnInit {
     searchQuery: string;
     displayQuery: string;
     title: string;
+    favorites: Array<number> = [];
     form: FormGroup;
     formControls = {};
 
@@ -60,6 +61,11 @@ export class GitSearchComponent implements OnInit {
             this.title = result.title
         });
     }
+
+    handleFavorite = (id) => {
+        return this.favorites.push(id);
+    }
+
 
     gitSearch = () => {
         this.UnifiedSearchService.unifiedSearch(this.searchQuery).subscribe((response) => {

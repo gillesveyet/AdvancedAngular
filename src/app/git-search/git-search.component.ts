@@ -62,8 +62,15 @@ export class GitSearchComponent implements OnInit {
         });
     }
 
-    handleFavorite = (id) => {
-        return this.favorites.push(id);
+    toggleFavorite = (id) => {
+        let index = this.favorites.indexOf(id);
+
+        if (index >= 0)
+            this.favorites.splice(index, 1);
+        else
+            this.favorites.push(id);
+
+        console.log(`toggleFavorite id:${id} index:${index}  favorites:${this.favorites}`, this.favorites);
     }
 
 

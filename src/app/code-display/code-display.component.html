@@ -5,8 +5,8 @@
             <small> by {{result.repository.owner.login | uppercase}}</small>
         </h4>
     </a>
-    <span class="favorite_icon" *ngIf="!checkFavorite(result)" (click)="addFavorite(result)">&#9734;</span>
-    <span class="favorite_icon favorited" *ngIf="checkFavorite(result)">&#9733;</span>
+    <span class="favorite_icon" *ngIf="!checkFavorite(result)" (click)="onToggleFavorite(result)">&#9734;</span>
+    <span class="favorite_icon favorited" *ngIf="checkFavorite(result)" (click)="onToggleFavorite(result)">&#9733;</span>
     <p class="description"> {{result.repository.description}}</p>
     <p> Path: {{result.path}} </p>
 </li>

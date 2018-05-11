@@ -9,15 +9,15 @@ import { GitCodeSearch, Item } from '../git-code-search';
 export class CodeDisplayComponent implements OnInit {
     @Input() searchResults: GitCodeSearch;
     @Input() favorites: Array<number>
-    @Output() updateFavorites = new EventEmitter<number>();
+    @Output() toggleFavorite = new EventEmitter<number>();
 
     constructor() { }
 
     ngOnInit() {
     }
 
-    addFavorite = (item: Item) => {
-        return this.updateFavorites.emit(item.repository.id);
+    onToggleFavorite = (item: Item) => {
+        return this.toggleFavorite.emit(item.repository.id);
     }
 
     checkFavorite = (item: Item) => {

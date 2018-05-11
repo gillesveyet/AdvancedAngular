@@ -11,15 +11,15 @@ import { GitSearch } from '../git-search';
 export class RepositoryDisplayComponent implements OnInit {
     @Input() searchResults: GitSearch
     @Input() favorites: Array<number>
-    @Output() updateFavorites = new EventEmitter<number>();
+    @Output() toggleFavorite = new EventEmitter<number>();
 
     constructor() { }
 
     ngOnInit() {
     }
 
-    addFavorite = (item) => {
-        return this.updateFavorites.emit(item.id);
+    onToggleFavorite = (item) => {
+        return this.toggleFavorite.emit(item.id);
     }
 
     checkFavorite = (item) => {

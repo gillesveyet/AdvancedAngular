@@ -32,3 +32,11 @@
         -1px 1px 0 #000,
         1px 1px 0 #000;
 }
+
+.favorite_icon:after {
+    content: "\2606";
+}
+
+.favorited:after {
+    content: "\2605";
+}

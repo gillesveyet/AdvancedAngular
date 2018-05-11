@@ -5,8 +5,7 @@
             <small> by {{result.owner.login | uppercase}}</small>
         </h4>
     </a>
-    <span class="favorite_icon" *ngIf="!checkFavorite(result)" (click)="onToggleFavorite(result)">&#9734;</span>
-    <span class="favorite_icon favorited" *ngIf="checkFavorite(result)" (click)="onToggleFavorite(result)">&#9733;</span>
+    <span [ngClass]="{'favorite_icon':true, 'favorited': checkFavorite(result)}" (click)="onToggleFavorite(result)"></span>
     <p class="description"> {{result.description}}</p>
     <p> Created On: {{result.created_at | date:'fullDate'}} </p>
 </li>
